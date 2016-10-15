@@ -1,4 +1,9 @@
 {
+  "welcome_screen": "Hello !!! Welcome to meme bot! Start generate the meme using for your need using our bot!",
+  "welcome_screen_buttton": "View out meme Teamplate",
+  "welcome_title": "Hello {{{firstName}}} and welcome! What do you want to do?",
+  "welcome_title_no_name": "Hello and welcome! What do you want to do?",
+
   "swear_reaction_1": "Looks like you just broke the speed of light!",
   "swear_reaction_2": "Sigh!",
   "swear_reaction_3": "Ghastly.",
