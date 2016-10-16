@@ -2,7 +2,7 @@
 const attachLocale = require('./lib/middleware/attach-locale');
 const s = require('./i18n/strings');
 
-//const fbBot = require('./lib/fb-bot');
+const fbBot = require('./lib/fb-bot');
 const fbTokenVerify = require('./lib/fb-token-verify');
 const chatHandler = require('./lib/chat-handler');
 const fetchFBProfile = require('./lib/middleware/fetch-fb-profile');
@@ -22,24 +22,22 @@ const app = express();
 const accessTokenMap= new Map();
 
 
-const graph = graphAPI();
-
 //const bot =fbBot(greeter);
-const bot           =   fbBot(greeter, {accessToken: accessToken, pageId: page.id, defaultLocale: page.lang, accessToken: page.accessToken});
-
+//const bot           =   fbBot({pageId: page.id, defaultLocale: page.lang, accessToken: page.accessToke
+const bot =new fbBot()
 for(let page of config.pages) {
 	let greeting=s[page.lang]['welcome_screen'];
 
 	let menu_buttons    =   {
-        'best_of_month': s[page.lang]['top_of_month'],
-        'five_last': s[page.lang]['five_last'],
-        'keywords': s[page.lang]['keywords'],
-        'switch_locale': s[page.lang]['change_language']
+        'play_quiz': s[page.lang]['play_quiz'],
+        'generate_meme': s[page.lang]['generate_meme'],
+        'watch_movie_clip': s[page.lang]['watch_movie_clip'],
+        'listen_audio': s[page.lang]['listen_audio']
     };
     let buttons     =   Object.keys(menu_buttons).map(key => ({
         type: 'postback',
         payload: key,
-        title: menu_buttons[key]
+        title: menu_buttons[key]||key
     }));
   	buttons.push({
         type: "web_url",
@@ -49,9 +47,9 @@ for(let page of config.pages) {
 
 
 	let pageSettings={
-		pageId:id,
-		setupPersistentMenu:buttons,
-		setupGreeting:greeting
+		pageId:page.id,
+		buttons:buttons,
+		setupGreeting:greeting,
 		setupStartButton:true
 	}
 	bot.start(pageSettings).catch(err => {
