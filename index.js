@@ -32,18 +32,19 @@ for(let page of config.pages) {
         'play_quiz': s[page.lang]['play_quiz'],
         'generate_meme': s[page.lang]['generate_meme'],
         'watch_movie_clip': s[page.lang]['watch_movie_clip'],
-        'listen_audio': s[page.lang]['listen_audio']
+        'help': s[page.lang]['listen_audio'],
+        'send_button_types': s[page.lang]['send_button_types']
     };
     let buttons     =   Object.keys(menu_buttons).map(key => ({
         type: 'postback',
         payload: key,
         title: menu_buttons[key]||key
     }));
-  	buttons.push({
-        type: "web_url",
-        title: s[page.lang]['talk_to_human'],
-        url: config.human_url
-    });
+  	// buttons.push({
+    //     type: "web_url",
+    //     title: s[page.lang]['talk_to_human'],
+    //     url: config.human_url
+    // });
 
 
 	let pageSettings={
